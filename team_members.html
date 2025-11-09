@@ -1,88 +1,405 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team Members | Visionaries 2025-26</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .neon-button {
-            font-family: 'Orbitron', sans-serif;
-            background-color: transparent;
-            color: var(--neon-cyan);
-            border: 2px solid var(--neon-cyan);
-            border-radius: 5px;
-            padding: 12px 24px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            width: 280px;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Team Members | Visionaries 2025-26</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
-        .neon-button:hover {
-            background-color: rgba(0, 255, 255, 0.1);
-            color: #fff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-            transform: translateY(-3px);
-        }
-    </style>
+  <style>
+    /* ---------- Ribbon (as in your CSS) ---------- */
+    .ribbon-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .ribbon {
+      width: 45%;
+      height: 12px;
+      background: red;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: transform 1s ease, opacity 0.5s ease;
+    }
+    .ribbon.left { left: 0; }
+    .ribbon.right { right: 0; }
+    .scissors {
+      font-size: 60px;
+      color: white;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.3s ease;
+    }
+    .scissors:active { transform: scale(0.9); }
+    .ribbon-container.cut .left {
+      transform: translate(-200px, -40px) rotate(-10deg);
+      opacity: 0;
+    }
+    .ribbon-container.cut .right {
+      transform: translate(200px, 40px) rotate(10deg);
+      opacity: 0;
+    }
+
+    /* ---------- Global ---------- */
+    :root{
+      --neon-cyan:#00ffff;
+      --neon-blue:#0077ff;
+      --neon-green:#00ff8c;
+      --dark-bg:#050a14;
+      --darker-bg:#030609;
+      --text-color:#ffffff;
+    }
+    *{ margin:0; padding:0; box-sizing:border-box; }
+    body{
+      font-family:'Rajdhani', sans-serif;
+      background-color:var(--dark-bg);
+      color:var(--text-color);
+      overflow-x:hidden;
+      position:relative;
+      min-height:100vh;
+    }
+    .container{
+      max-width:1200px;
+      margin:0 auto;
+      padding:20px;
+      position:relative;
+      z-index:2;
+    }
+
+    /* Subtle circuit bg */
+    .circuit-background{
+      position:fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background-image:url('images/circuit-bg.svg'); /* keep your path if ../images */
+      background-size:cover;
+      opacity:0.15;
+      z-index:1;
+      pointer-events:none;
+    }
+
+    /* ---------- Buttons ---------- */
+    .neon-button{
+      font-family:'Orbitron', sans-serif;
+      background-color:transparent;
+      color:var(--neon-cyan);
+      border:2px solid var(--neon-cyan);
+      border-radius:5px;
+      padding:12px 24px;
+      font-size:1.1rem;
+      cursor:pointer;
+      position:relative;
+      overflow:hidden;
+      transition:all 0.3s ease;
+      box-shadow:0 0 10px rgba(0,255,255,0.5);
+      text-transform:uppercase;
+      letter-spacing:2px;
+      outline:none;
+    }
+    .neon-button:hover,
+    .neon-button:focus{
+      background-color:rgba(0,255,255,0.1);
+      color:#fff;
+      box-shadow:0 0 20px rgba(0,255,255,0.8);
+      transform:translateY(-3px);
+    }
+    .neon-button:active{
+      transform:translateY(1px);
+      box-shadow:0 0 15px rgba(0,255,255,0.6);
+    }
+
+    /* ---------- Page Title ---------- */
+    .page-title{
+      font-family:'Orbitron', sans-serif;
+      font-size:2.5rem;
+      text-align:center;
+      margin:20px 0 30px;
+      color:var(--neon-cyan);
+      text-shadow:0 0 10px rgba(0,255,255,0.5);
+    }
+
+    /* ---------- Team Grid ---------- */
+    .team-grid{
+      display:flex;
+      flex-direction:column;
+      gap:40px;
+      margin-bottom:40px;
+      perspective:1200px; /* helps smooth scaling */
+    }
+    .team-top,
+    .team-bottom{
+      display:flex;
+      justify-content:center;
+      gap:30px;
+      flex-wrap:wrap;
+    }
+
+    /* ---------- Team Card (UPGRADED) ---------- */
+    .team-member{
+      background-color:rgba(5,10,20,0.7);
+      border:1px solid var(--neon-blue);
+      border-radius:14px;
+      padding:22px;
+      text-align:center;
+      box-shadow:0 0 10px rgba(0,119,255,0.3);
+      position:relative;
+      cursor:pointer;
+      overflow:hidden;
+      will-change:transform, box-shadow;
+      transition:transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+      transform-origin:center center;
+    }
+    /* keep consistent widths for grid */
+    .team-top .team-member{
+      width:270px;
+      max-width:90vw;
+    }
+    .team-bottom .team-member{
+      width:230px;
+      max-width:90vw;
+      flex:1 1 220px;
+    }
+
+    /* glow ring on hover */
+    .team-member::after{
+      content:'';
+      position:absolute;
+      inset:-2px;
+      border-radius:16px;
+      box-shadow:0 0 0 rgba(0,255,255,0);
+      transition:box-shadow 0.45s ease;
+      pointer-events:none;
+    }
+
+    .team-member:hover{
+      transform:scale(1.12);
+      z-index:5;
+      box-shadow:0 0 28px rgba(0,255,255,0.6);
+      border-color:var(--neon-cyan);
+    }
+    .team-member:hover::after{
+      box-shadow:0 0 30px rgba(0,255,255,0.55);
+    }
+
+    /* Photo */
+    .member-photo{
+      width:150px; height:150px;
+      border-radius:50%;
+      margin:0 auto 14px;
+      border:2px solid var(--neon-cyan);
+      box-shadow:0 0 15px rgba(0,255,255,0.45);
+      background-color:rgba(0,255,255,0.08);
+      position:relative;
+      overflow:hidden;
+    }
+    .member-photo img{
+      width:100%; height:100%;
+      object-fit:cover; display:block;
+      transition:transform 0.45s ease;
+      will-change:transform;
+    }
+    .team-member:hover .member-photo img{
+      transform:scale(1.15);
+    }
+
+    .team-member h3{
+      font-family:'Orbitron', sans-serif;
+      font-size:1.25rem;
+      margin-bottom:6px;
+      color:var(--neon-cyan);
+      transition:color 0.3s ease;
+    }
+    .role{
+      color:var(--neon-green);
+      font-weight:700;
+      margin-bottom:10px;
+      font-size:1.05rem;
+      transition:color 0.3s ease;
+    }
+
+    /* Bio reveal */
+    .bio{
+      font-size:0.95rem;
+      line-height:1.45;
+      max-height:0;
+      opacity:0;
+      overflow:hidden;
+      transition:max-height 0.5s ease, opacity 0.5s ease;
+    }
+    .team-member:hover .bio{
+      max-height:260px; /* enough to reveal typical copy */
+      opacity:1;
+    }
+
+    /* ---------- About / Activities (kept from your CSS) ---------- */
+    .glowing-card{
+      background-color:rgba(5,10,20,0.7);
+      border:1px solid var(--neon-blue);
+      border-radius:10px;
+      padding:20px;
+      margin-bottom:20px;
+      transition:box-shadow 0.3s ease;
+      width:1200px;
+      max-width:95vw;
+    }
+    .glowing-card:hover{ box-shadow:0 0 15px rgba(0,119,255,0.5); }
+
+    .activities-list{
+      display:flex;
+      flex-direction:column;
+      gap:25px;
+      max-width:800px;
+      margin:0 auto;
+    }
+    .activity-item{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      background-color:rgba(5,10,20,0.7);
+      border:1px solid var(--neon-green);
+      border-radius:10px;
+      padding:20px;
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .activity-item:hover{
+      transform:translateX(10px);
+      box-shadow:0 0 15px rgba(0,255,140,0.5);
+    }
+    .activity-icon{
+      font-size:2.5rem;
+      color:var(--neon-green);
+      min-width:60px;
+      text-align:center;
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px){
+      .page-title{ font-size:2rem; }
+      .team-member{
+        /* disable big jump on small screens, keep subtle */
+        transform:none;
+      }
+      .team-member:hover{
+        transform:scale(1.06);
+      }
+      .member-photo{ width:130px; height:130px; }
+    }
+
+    /* Utility */
+    .btn-row{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin:22px 0 10px;
+    }
+    .brand {
+      display:block;
+      text-align:center;
+      margin-top:10px;
+    }
+  </style>
 </head>
 <body>
 
-<center><img src="images/sdmlogo.jpg" height="107px" width="107px"></center>
+  <div class="circuit-background"></div>
 
-<h2 class="page-title">Team Members</h2>
+  <div class="container">
+    <span class="brand">
+      <img src="images/sdmlogo.jpg" alt="SDM Logo" width="107" height="107"/>
+    </span>
 
-<div class="team-grid">
-    <div class="team-top" style="display: flex; justify-content: center; gap: 30px;">
-        <div class="team-member">
-            <div class="member-photo"><img src="images/dinesh1.jpg" alt="Dinesh Naik"></div>
-            <h3>Dinesh Naik</h3>
-            <p class="role">President</p>
-            <p class="bio">The guiding force behind Visionaries...</p>
+    <h2 class="page-title">Team Members</h2>
+
+    <div class="team-grid">
+      <div class="team-top">
+        <!-- President -->
+        <div class="team-member" tabindex="0" aria-label="Dinesh Naik, President">
+          <div class="member-photo">
+            <img src="images/dinesh1.jpg" alt="Dinesh Naik"/>
+          </div>
+          <h3>Dinesh Naik</h3>
+          <p class="role">President</p>
+          <p class="bio">The guiding force behind Visionaries—sets direction, aligns the team, and ensures each initiative delivers real impact across our community.</p>
         </div>
 
-        <div class="team-member">
-            <div class="member-photo"><img src="images/adline1.jpg" alt="Adline"></div>
-            <h3>Adline Mural Rodrigues</h3>
-            <p class="role">Vice President</p>
-            <p class="bio">The creative strategist who bridges ideas & execution...</p>
+        <!-- Vice President -->
+        <div class="team-member" tabindex="0" aria-label="Adline Mural Rodrigues, Vice President">
+          <div class="member-photo">
+            <img src="images/adline1.jpg" alt="Adline Mural Rodrigues"/>
+          </div>
+          <h3>Adline Mural Rodrigues</h3>
+          <p class="role">Vice President</p>
+          <p class="bio">A creative strategist connecting ideas to execution—drives collaboration, removes blockers, and helps teams ship with polish.</p>
         </div>
+      </div>
+
+      <div class="team-bottom">
+        <!-- Secretary -->
+        <div class="team-member" tabindex="0" aria-label="Aishwarya Naik, Secretary">
+          <div class="member-photo">
+            <img src="images/aishwarya1.jpg" alt="Aishwarya Naik"/>
+          </div>
+          <h3>Aishwarya Naik</h3>
+          <p class="role">Secretary</p>
+          <p class="bio">Organizes, communicates, and keeps the engine running—documentation, schedules, and smooth coordination end-to-end.</p>
+        </div>
+
+        <!-- Treasurer -->
+        <div class="team-member" tabindex="0" aria-label="Nikhil Sankolli, Treasurer">
+          <div class="member-photo">
+            <img src="images/nikhil1.jpg" alt="Nikhil Sankolli"/>
+          </div>
+          <h3>Nikhil Sankolli</h3>
+          <p class="role">Treasurer</p>
+          <p class="bio">Ensures resources are used wisely—budgeting, tracking, and making smart calls that maximize value for every event.</p>
+        </div>
+
+        <!-- Event Coordinator -->
+        <div class="team-member" tabindex="0" aria-label="Megha Naik, Event Coordinator">
+          <div class="member-photo">
+            <img src="images/megha1.jpg" alt="Megha Naik"/>
+          </div>
+          <h3>Megha Naik</h3>
+          <p class="role">Event Coordinator</p>
+          <p class="bio">Powerhouse of planning—concept to stage. Crafts experiences with thoughtful flow, creative themes, and flawless timing.</p>
+        </div>
+      </div>
     </div>
 
-    <div class="team-bottom">
-        <div class="team-member">
-            <div class="member-photo"><img src="images/aishwarya1.jpg" alt="Aishwarya"></div>
-            <h3>Aishwarya Naik</h3>
-            <p class="role">Secretary</p>
-            <p class="bio">The organizer and communicator...</p>
-        </div>
-
-        <div class="team-member">
-            <div class="member-photo"><img src="images/nikhil1.jpg" alt="Nikhil"></div>
-            <h3>Nikhil Sankolli</h3>
-            <p class="role">Treasurer</p>
-            <p class="bio">Handles resources smartly...</p>
-        </div>
-
-        <div class="team-member">
-            <div class="member-photo"><img src="images/megha1.jpg" alt="Megha"></div>
-            <h3>Megha Naik</h3>
-            <p class="role">Event Coordinator</p>
-            <p class="bio">The powerhouse of planning and creativity...</p>
-        </div>
+    <div class="btn-row">
+      <a href="home.html"><button class="neon-button"><i class="fas fa-home"></i> Home</button></a>
+      <a href="about.html"><button class="neon-button"><i class="fas fa-info-circle"></i> About Us</button></a>
+      <a href="what-we-do.html"><button class="neon-button"><i class="fas fa-tasks"></i> What We Do</button></a>
     </div>
-</div>
+  </div>
 
-<br>
+  <!-- Optional: keyboard focus also reveals bio (accessibility) -->
+  <script>
+    // Allow keyboard users to see the same reveal when focusing a card
+    document.querySelectorAll('.team-member').forEach(card => {
+      card.addEventListener('focusin', () => card.classList.add('hover'));
+      card.addEventListener('focusout', () => card.classList.remove('hover'));
+    });
+  </script>
 
-<center>
-    <a href="home.html"><button class="neon-button"><i class="fas fa-home"></i> Home</button></a>
-    <a href="about.html"><button class="neon-button"><i class="fas fa-info-circle"></i> About Us</button></a>
-    <a href="what-we-do.html"><button class="neon-button"><i class="fas fa-tasks"></i> What We Do</button></a>
-</center>
-
-<br>
+  <style>
+    /* Focus state mirrors hover (for keyboard users) */
+    .team-member.hover{
+      transform:scale(1.12);
+      z-index:5;
+      box-shadow:0 0 28px rgba(0,255,255,0.6);
+      border-color:var(--neon-cyan);
+    }
+    .team-member.hover .member-photo img{ transform:scale(1.15); }
+    .team-member.hover .bio{
+      max-height:260px;
+      opacity:1;
+    }
+  </style>
 </body>
 </html>

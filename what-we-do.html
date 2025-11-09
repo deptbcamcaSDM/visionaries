@@ -4,9 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>What We Do | Visionaries 2025-26</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        /* ----------- Global Styles ----------- */
+        :root {
+            --neon-cyan: #00ffff;
+            --neon-blue: #0077ff;
+            --neon-green: #00ff8c;
+            --dark-bg: #050a14;
+            --text-color: #ffffff;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        img {
+            margin-top: 20px;
+        }
+
+        .page-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            margin-top: 10px;
+            margin-bottom: 40px;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+        }
+
+        /* ----------- Neon Button Styling ----------- */
         .neon-button {
             font-family: 'Orbitron', sans-serif;
             background-color: transparent;
@@ -16,67 +50,156 @@
             padding: 12px 24px;
             font-size: 1.2rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s ease;
             width: 280px;
+            text-transform: uppercase;
         }
 
         .neon-button:hover {
             background-color: rgba(0, 255, 255, 0.1);
             color: #fff;
             transform: translateY(-3px);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        /* ----------- Activity Section ----------- */
+        .activities-list {
+            max-width: 850px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding: 0 20px;
+        }
+
+        .activity-item {
+            background-color: rgba(5, 10, 20, 0.75);
+            border: 1px solid var(--neon-green);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.45s ease;
+        }
+
+        /* Hover Effect */
+        .activity-item:hover {
+            transform: scale(1.12);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+            z-index: 5;
+        }
+
+        /* Icon */
+        .activity-icon {
+            font-size: 2.8rem;
+            color: var(--neon-green);
+            min-width: 70px;
+            text-align: center;
+            transition: transform 0.45s ease;
+        }
+
+        .activity-item:hover .activity-icon {
+            transform: scale(1.25);
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Title */
+        .activity-content h3 {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: var(--neon-cyan);
+            transition: color 0.3s ease;
+        }
+
+        .activity-item:hover h3 {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+        }
+
+        /* Description */
+        .activity-content p {
+            margin-top: 8px;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            font-size: 1rem;
+            line-height: 1.5;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+        }
+
+        .activity-item:hover .activity-content p {
+            max-height: 250px;
+            opacity: 1;
+        }
+
+        /* ----------- Footer Buttons ----------- */
+        .button-row {
+            margin-top: 50px;
+            margin-bottom: 40px;
         }
     </style>
 </head>
+
 <body>
 
-<center><img src="images/sdmlogo.jpg" height="107px" width="107px"></center>
+    <!-- Logo -->
+    <center>
+        <img src="images/sdmlogo.jpg" height="107px" width="107px">
+    </center>
 
-<h2 class="page-title">What We Do</h2>
+    <!-- Title -->
+    <h2 class="page-title">What We Do</h2>
 
-<div class="activities-list">
+    <!-- Activity List -->
+    <div class="activities-list">
 
-    <div class="activity-item">
-        <div class="activity-icon"><i class="fas fa-gamepad"></i></div>
-        <div class="activity-content">
-            <h3>Weekend Games</h3>
-            <p>Collaborative gaming sessions that build teamwork.</p>
+        <div class="activity-item">
+            <div class="activity-icon"><i class="fas fa-gamepad"></i></div>
+            <div class="activity-content">
+                <h3>Weekend Games</h3>
+                <p>Collaborative gaming sessions that improve teamwork, build communication, and help students develop strategic thinking.</p>
+            </div>
         </div>
+
+        <div class="activity-item">
+            <div class="activity-icon"><i class="fas fa-user-tie"></i></div>
+            <div class="activity-content">
+                <h3>A Day With an Expert</h3>
+                <p>Interactive sessions with industry professionals that provide practical knowledge, career guidance, and real-world insights.</p>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-icon"><i class="fas fa-puzzle-piece"></i></div>
+            <div class="activity-content">
+                <h3>Enigma – Tech Fest</h3>
+                <p>Our flagship event featuring competitive tech challenges, exhibits, creative innovations, and student-led demonstrations.</p>
+            </div>
+        </div>
+
+        <div class="activity-item">
+            <div class="activity-icon"><i class="fas fa-laptop-code"></i></div>
+            <div class="activity-content">
+                <h3>Tech Exhibition</h3>
+                <p>A showcase of innovative projects, hardware setups, and software creations that inspire and encourage learning in technology.</p>
+            </div>
+        </div>
+
     </div>
 
-    <div class="activity-item">
-        <div class="activity-icon"><i class="fas fa-user-tie"></i></div>
-        <div class="activity-content">
-            <h3>A Day With an Expert</h3>
-            <p>Interactive sessions with industry professionals.</p>
-        </div>
+    <!-- Navigation Buttons -->
+    <div class="button-row">
+        <a href="home.html"><button class="neon-button"><i class="fas fa-home"></i> Home</button></a>
+        <a href="team_members.html"><button class="neon-button"><i class="fas fa-users"></i> Team Members</button></a>
+        <a href="about.html"><button class="neon-button"><i class="fas fa-info-circle"></i> About Us</button></a>
     </div>
 
-    <div class="activity-item">
-        <div class="activity-icon"><i class="fas fa-puzzle-piece"></i></div>
-        <div class="activity-content">
-            <h3>Enigma – Tech Fest</h3>
-            <p>Our flagship event showcasing innovation.</p>
-        </div>
-    </div>
-
-    <div class="activity-item">
-        <div class="activity-icon"><i class="fas fa-laptop-code"></i></div>
-        <div class="activity-content">
-            <h3>Tech Exhibition</h3>
-            <p>Displaying our projects and inspiring the tech community.</p>
-        </div>
-    </div>
-
-</div>
-
-<br><br>
-
-<center>
-    <a href="home.html"><button class="neon-button"><i class="fas fa-home"></i> Home</button></a>
-    <a href="team_members.html"><button class="neon-button"><i class="fas fa-users"></i> Team Members</button></a>
-    <a href="about.html"><button class="neon-button"><i class="fas fa-info-circle"></i> About Us</button></a>
-</center>
-
-<br>
 </body>
 </html>

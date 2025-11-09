@@ -6,7 +6,10 @@
     <title>About Us | Visionaries 2025-26</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+
+        /* Neon Buttons */
         .neon-button {
             font-family: 'Orbitron', sans-serif;
             background-color: transparent;
@@ -16,24 +19,51 @@
             padding: 12px 24px;
             font-size: 1.2rem;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
             transition: all 0.3s ease;
             box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
             text-transform: uppercase;
             letter-spacing: 2px;
-            outline: none;
             width: 280px;
         }
-
         .neon-button:hover {
             background-color: rgba(0, 255, 255, 0.1);
             color: #fff;
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
             transform: translateY(-3px);
         }
+
+        /* Glowing Box */
+        .glowing-box {
+            width: 90%;
+            max-width: 750px;
+            padding: 20px;
+            margin: 15px auto;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 15px;
+            background: rgba(0, 255, 255, 0.05);
+            box-shadow: 0 0 12px rgba(0, 255, 255, 0.4), inset 0 0 12px rgba(0, 255, 255, 0.3);
+            transition: 0.3s ease;
+        }
+
+        .glowing-box:hover {
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8), inset 0 0 25px rgba(0, 255, 255, 0.5);
+            transform: translateY(-4px);
+        }
+
+        .glowing-box h3 {
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 2px;
+        }
+
+        .glowing-box p {
+            color: #e0ffff;
+            font-size: 1rem;
+        }
+
     </style>
 </head>
+
 <body>
 
 <center><img src="images/sdmlogo.jpg" height="107px" width="107px"></center>
@@ -41,37 +71,37 @@
 <h2 class="page-title">About Us</h2>
 
 <div class="scrollable-content">
-<center>
-    <div class="glowing-card">
+
+    <div class="glowing-box">
         <h3>Visionaries Intro</h3>
         <p>VISIONARIES is the official association of BCA Class of 2025-26...</p>
     </div>
 
-    <div class="glowing-card">
+    <div class="glowing-box">
         <h3>Who We Are</h3>
         <p>A dynamic group of students with diverse skills united by our passion for technology.</p>
     </div>
 
-    <div class="glowing-card">
+    <div class="glowing-box">
         <h3>Vision</h3>
         <p>To pioneer technological solutions that address real-world challenges.</p>
     </div>
 
-    <div class="glowing-card">
+    <div class="glowing-box">
         <h3>Motto</h3>
         <p>"Innovate. Create. Elevate."</p>
     </div>
 
-    <div class="glowing-card">
+    <div class="glowing-box">
         <h3>Why Visionaries</h3>
         <p>Because we don’t just see the future — we create it.</p>
     </div>
 
-    <div class="glowing-card">
+    <div class="glowing-box">
         <h3>Spirit of Visionaries</h3>
         <p>Driven by curiosity, resilience, and a passion for excellence.</p>
     </div>
-</center>
+
 </div>
 
 <br>

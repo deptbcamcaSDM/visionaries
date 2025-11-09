@@ -6,22 +6,20 @@
     <title>Ribbon Cut | Visionaries 2025-26</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <script>
-        // ⏳ Auto redirect after animation (3.5 seconds)
-        setTimeout(function() {
-            window.location.href = "home.html";
-        }, 1000);
-    </script>
 </head>
 <body>
 
-    <!-- Ribbon Animation -->
+    <!-- Ribbon + Scissors (all aligned in same line & middle) -->
     <div class="ribbon-container">
-        <div class="ribbon"></div>
+
+        <div class="ribbon left"></div>
+
         <div class="scissors">
             <i class="fas fa-cut"></i>
         </div>
+
+        <div class="ribbon right"></div>
+
     </div>
 
     <!-- Background -->
@@ -32,11 +30,26 @@
         <source src="sounds/ribbon-cut.mp3" type="audio/mpeg">
     </audio>
 
+    <!-- CLICK HANDLER SCRIPT -->
     <script>
-        // play ribbon audio automatically
-        window.onload = function() {
-            document.getElementById("ribbon-sound").play();
-        };
+        const scissors = document.querySelector(".scissors");
+        const ribbonContainer = document.querySelector(".ribbon-container");
+        const sound = document.getElementById("ribbon-sound");
+
+        scissors.addEventListener("click", function () {
+
+            // Play sound
+            sound.currentTime = 0;
+            sound.play();
+
+            // Trigger ribbon cut animation
+            ribbonContainer.classList.add("cut");
+
+            // Redirect after animation
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 2000);
+        });
     </script>
 
 </body>
